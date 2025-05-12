@@ -28,7 +28,7 @@ class BillingController extends Controller
             ? ucfirst($numberTransformer->toWords($overallTotal)) . ' rupees only'
             : 'Zero rupees only';
 
-            // dd($totalInWords, $overallTotal, $materials, $workers, $billings);
+        // dd($totalInWords, $overallTotal, $materials, $workers, $billings);
 
         return view('billings.index', compact('materials', 'workers', 'billings', 'overallTotal', 'totalInWords'));
     }
@@ -40,7 +40,7 @@ class BillingController extends Controller
         if ($request->material_id != null) {
             $total = $request->sqft * $request->rate * $request->qty;
         } else {
-            $total = ($request->wage * $request->no_of_days) + ( $request->food * $request->no_of_days) + $request->transport;
+            $total = ($request->wage * $request->no_of_days) + ($request->food * $request->no_of_days) + $request->transport;
         }
 
         // Convert work dates to a comma-separated string
@@ -55,6 +55,7 @@ class BillingController extends Controller
             'rate' => $request->rate ?? null,
             'total' => $total,
             'wages' => $request->wage ?? null,
+            'material_type' => $request->material_type ?? null,
             'food' => $request->food ?? null,
             'transport' => $request->transport ?? null,
             'no_of_days' => $request->no_of_days ?? null,

@@ -17,6 +17,7 @@ class Billing extends Model
         'rate',
         'total',
         'wages',
+        'material_type',
         'food',
         'transport',
         'no_of_days',

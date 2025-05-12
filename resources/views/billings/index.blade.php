@@ -34,6 +34,15 @@
                             @endforeach
                         </select>
                     </div>
+                    <div class="form-group col-md-6 mb-3" id="material-type-group" style="display: none;">
+                    <label for="material_type">Type</label>
+                    <select class="form-control" name="material_type" id="material_type">
+                        <option value="">-- Select Type --</option>
+                        <option value="Arch">Arch</option>
+                        <option value="Frame">Frame</option>
+                    </select>
+                </div>
+
                     <div class="form-group col-md-6 mb-3">
                         <label for="sqft">Square Feet</label>
                         <input type="number" step="0.01" name="sqft" id="sqft" class="form-control" placeholder="Enter sq. ft">
@@ -110,6 +119,7 @@
                 <thead>
                     <tr>
                         <th>S. No</th>
+                        <th>Material Type</th>
                         <th>Name</th>
                         <th>Rate</th>
                         <th>Qty</th>
@@ -122,6 +132,7 @@
                     @foreach($billings->where('type', 'material') as $billing)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
+                            <td>{{ $billing->material_type ?? 'N/A' }}</td>
                             <td>{{ $billing->material->name ?? 'N/A' }}</td>
                             <td>{{ $billing->rate }}</td>
                             <td>{{ $billing->qty }}</td>
@@ -346,6 +357,7 @@
                 document.getElementById('worker-section').style.display = (type === 'worker') ? 'block' : 'none';
                 document.getElementById('material-table').style.display = (type === 'material') ? 'block' : 'none';
                 document.getElementById('worker-table').style.display = (type === 'worker') ? 'block' : 'none';
+                    document.getElementById('material-type-group').style.display = (type === 'material') ? 'block' : 'none';
             }
 
             function fetchMaterialDetails(materialId) {
